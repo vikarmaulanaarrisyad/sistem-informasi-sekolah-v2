@@ -1,44 +1,51 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="en">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ config('app.name') }} | @yield('title')</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
+    @include('layouts.include.css')
+    
+</head>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
 
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body class="font-sans antialiased">
-        <x-jet-banner />
+        @include('layouts.partials.header')
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+        @include('layouts.partials.sidebar')
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+        <div class="content-wrapper">
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0">@yield('title')</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                @section('breadcrumb')
+                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Beranda</a></li>
+                                @show
+                            </ol>
+                        </div>
                     </div>
-                </header>
-            @endif
+                </div>
+            </div>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+            <section class="content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+            </section>
         </div>
 
-        @stack('modals')
+        @include('layouts.partials.footer')
+    </div>
 
-        @livewireScripts
-    </body>
+    @include('layouts.include.script')
+</body>
+
 </html>
