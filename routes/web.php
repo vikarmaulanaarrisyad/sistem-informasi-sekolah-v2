@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\{
+    DashboardController,
+    PermissionController,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +31,8 @@ Route::group([
         'middleware' => 'role:admin',
         'prefix' => 'admin'
     ], function () {
-        // 
+        // Permission
+        Route::get('/permission/data', [PermissionController::class, 'data'])->name('admin.permission.data');
+        Route::resource('permission', PermissionController::class);
     });
 });

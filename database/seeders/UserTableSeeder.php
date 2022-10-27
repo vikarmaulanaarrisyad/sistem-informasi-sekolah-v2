@@ -17,12 +17,37 @@ class UserTableSeeder extends Seeder
     {
         User::factory(100)->create();
 
-        $user = User::first();
-        $user->name = 'Operator Sekolah';
-        $user->email = 'admin@gmail.com';
-        $user->username = 'admin';
-        $user->save();
+        $userAdmin = User::first();
+        $userAdmin->name = 'Operator Sekolah';
+        $userAdmin->email = 'admin@gmail.com';
+        $userAdmin->username = 'admin';
+        $userAdmin->save();
 
-        $user->assignRole('admin');
+        $userKepalaSekolah = User::find(2);
+        $userKepalaSekolah->name = 'Kurniati';
+        $userKepalaSekolah->username = 'kurniati';
+        $userKepalaSekolah->email = 'kurniati@gmail.com';
+
+        $userKepalaSekolah->save();
+
+        $userGuru = User::find(3);
+        $userGuru->name = 'Vikar Maulana Arrisyad';
+        $userGuru->email = 'vikar@gmail.com';
+        $userGuru->username = 'vikar';
+
+        $userGuru->save();
+
+        $userSiswa = User::find(4);
+        $userSiswa->name = 'Emi Fatikha';
+        $userSiswa->email = 'emifatikha@gmail.com';
+        $userSiswa->username = 'emi';
+
+        $userSiswa->save();
+
+
+        $userAdmin->assignRole('admin');
+        $userKepalaSekolah->assignRole('kepala sekolah');
+        $userGuru->assignRole('guru');
+        $userSiswa->assignRole('siswa');
     }
 }

@@ -30,6 +30,7 @@
                     </a>
                 </li>
 
+                @can('user_management_access')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -39,28 +40,36 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('permission_access')
+                        <li class="nav-item">
+                            <a href="{{ route('permission.index') }}" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Permissions</p>
+                            </a>
+                        </li> 
+                        @endcan
+                        @can('role_access')
                         <li class="nav-item">
                             <a href="pages/charts/chartjs.html" class="nav-link">
                                 <i class="fas fa-briefcase nav-icon"></i>
                                 <p>Role</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="pages/charts/flot.html" class="nav-link">
-                                <i class="fas fa-unlock-alt nav-icon"></i>
-                                <p>Permission</p>
-                            </a>
-                        </li>
+                        @endcan
+                        @can('user_access')
                         <li class="nav-item">
                             <a href="pages/charts/inline.html" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>User</p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
-                </li>
+                </li> 
+                @endcan
 
-                {{--  <li class="nav-header">EXAMPLES</li>  --}}
+
+                {{--  <li class="nav-header">KELOLA DATA</li>  --}}
                 <li class="nav-item">
                     <a href="#" onclick="document.querySelector('#form-logout').submit()" class="nav-link">
                         <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -75,7 +84,5 @@
                 </li>
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>
