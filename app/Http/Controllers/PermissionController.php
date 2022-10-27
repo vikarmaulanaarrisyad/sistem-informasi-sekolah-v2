@@ -28,7 +28,20 @@ class PermissionController extends Controller
         $permission = Permission::all();
 
         return datatables($permission)
-        ->addIndexColumn()
+            ->addIndexColumn()
+            ->editColumn('created_at', function ($permission) {
+                return tanggal_indonesia($permission->created_at);
+            })
+            ->editColumn('updated_at', function ($permission) {
+                return tanggal_indonesia($permission->updated_at);
+            })
+            ->addColumn('aksi', function ($permission) {
+                return '
+                <button onclik="editForm(`'. route('permission.show', $permission->id) .'`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
+                <button onclik="deleteForm(`'. route('permission.destroy', $permission->id) .'`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                ';
+            })
+            ->escapeColumns([])
             ->make(true);
     }
 
