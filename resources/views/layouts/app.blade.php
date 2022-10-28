@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} | @yield('title')</title>
 
     <link rel="stylesheet"
@@ -16,10 +17,10 @@
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('AdminLTE/plugins/summernote/summernote-bs4.min.css') }}">
-   
+    <link rel="stylesheet" href="{{ asset('/AdminLTE/plugins/sweetalert2/sweetalert2.min.css') }}">
+    
     @stack('css_vendor')
     <link rel="stylesheet" href="{{ asset('/AdminLTE/dist/css/adminlte.min.css') }}">
-   
     @stack('css')
     
 </head>
@@ -75,13 +76,15 @@
     <script src="{{ asset('AdminLTE/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('AdminLTE/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    
    
+      
+    <!-- sweetalert2 -->
+    <script src="{{ asset('/AdminLTE/plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
     @stack('scripts_vendor')
 
     <!-- AdminLTE App -->
     <script src="{{ asset('/AdminLTE/dist/js/adminlte.js') }}"></script>
-    {{--  <script src="{{ asset('/js/custom.js') }}"></script>  --}}
+    <script src="{{ asset('/js/scripts.js') }}"></script>
 
     @stack('scripts')
     

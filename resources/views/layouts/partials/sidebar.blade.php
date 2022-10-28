@@ -22,7 +22,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('dashboard') }}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -31,6 +31,7 @@
                 </li>
 
                 @can('user_management_access')
+                <li class="nav-header">MANAJEMEN USER</li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -68,7 +69,116 @@
                 </li> 
                 @endcan
 
+                @hasrole('admin')
+                <li class="nav-header">MASTER DATA</li>
+                @else
+                <li class="nav-header">MENU USER</li>
+                @endhasrole
 
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-university"></i>
+                        <p>
+                            Profil Sekolah
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Tahun Pelajaran
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Kurikulum
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-school"></i>
+                        <p>
+                            Kelas
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Rombongan Belajar
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-friends"></i>
+                        <p>
+                            Peserta Didik
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('permission.index') }}" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Permissions</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="pages/charts/chartjs.html" class="nav-link">
+                                <i class="fas fa-briefcase nav-icon"></i>
+                                <p>Mutasi Masuk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/charts/inline.html" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Mutasi Keluar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li> 
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>
+                            GTK
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('permission.index') }}" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Permissions</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="pages/charts/chartjs.html" class="nav-link">
+                                <i class="fas fa-briefcase nav-icon"></i>
+                                <p>Mutasi Masuk</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/charts/inline.html" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Mutasi Keluar</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li> 
                 {{--  <li class="nav-header">KELOLA DATA</li>  --}}
                 <li class="nav-item">
                     <a href="#" onclick="document.querySelector('#form-logout').submit()" class="nav-link">

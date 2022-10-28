@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 use DataTables;
+use Illuminate\Support\Facades\Validator;
 
 class PermissionController extends Controller
 {
@@ -37,8 +38,8 @@ class PermissionController extends Controller
             })
             ->addColumn('aksi', function ($permission) {
                 return '
-                <button onclik="editForm(`'. route('permission.show', $permission->id) .'`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
-                <button onclik="deleteForm(`'. route('permission.destroy', $permission->id) .'`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                <button onclick="editForm(`' . route('permission.show', $permission->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
+                <button  onclick="deleteData(`' . route('permission.destroy', $permission->id) . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
                 ';
             })
             ->escapeColumns([])
@@ -63,7 +64,21 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Permission Gagal Disimpan.'], 422);
+        }
+
+        $data = [
+            'name' => $request->name,
+        ];
+
+        Permission::create($data);
+
+        return response()->json(['data' => $data, 'message' => 'Permission Berhasil Disimpan.']);
     }
 
     /**
@@ -75,6 +90,8 @@ class PermissionController extends Controller
     public function show(Permission $permission)
     {
         abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return response()->json(['data' => $permission]);
     }
 
     /**
@@ -97,7 +114,21 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Permission Gagal Disimpan.'], 422);
+        }
+
+        $data = [
+            'name' => $request->name,
+        ];
+
+        $permission->update($data);
+
+        return response()->json(['data' => $data, 'message' => 'Permission Berhasil Disimpan.']);
     }
 
     /**
@@ -110,4 +141,5 @@ class PermissionController extends Controller
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
     }
+
 }
