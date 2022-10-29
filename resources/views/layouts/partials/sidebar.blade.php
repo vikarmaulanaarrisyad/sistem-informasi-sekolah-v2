@@ -51,7 +51,7 @@
                         @endcan
                         @can('role_access')
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="{{ route('role.index') }}" class="nav-link">
                                 <i class="fas fa-briefcase nav-icon"></i>
                                 <p>Role</p>
                             </a>

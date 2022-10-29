@@ -140,6 +140,10 @@ class PermissionController extends Controller
     public function destroy(Permission $permission)
     {
         abort_if(Gate::denies('user_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $permission->delete();
+
+        return response()->json(['message' => 'Permission Berhasil Dihapus.']);
     }
 
 }

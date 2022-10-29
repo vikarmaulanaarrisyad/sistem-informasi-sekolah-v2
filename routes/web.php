@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     DashboardController,
     PermissionController,
+    RoleController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -34,5 +35,10 @@ Route::group([
         // Permission
         Route::get('/permission/data', [PermissionController::class, 'data'])->name('admin.permission.data');
         Route::resource('permission', PermissionController::class);
+
+        // Role
+        Route::get('/role/data', [RoleController::class, 'data'])->name('admin.role.data');
+        Route::resource('/role', RoleController::class);
+        
     });
 });

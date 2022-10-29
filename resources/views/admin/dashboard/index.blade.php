@@ -8,5 +8,5 @@
 @endsection
 
 @section('content')
-@include('admin.dashboard._start_box')
+@include('admin.dashboard._startBox')
 @endsection

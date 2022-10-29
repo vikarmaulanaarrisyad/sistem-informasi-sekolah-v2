@@ -57,7 +57,7 @@
                 ]
         });
         
-        function addForm(url, title = 'Tambah Data Tahun Akademik') {
+        function addForm(url, title = 'Tambah Permission') {
             $(modal).modal('show'); 
             $(`${modal} .modal-title`).text(title); 
             $(`${modal} form`).attr('action', url); 
@@ -65,7 +65,7 @@
             resetForm(`${modal} form`);
         }
 
-        function editForm(url, title = 'Edit Data Tahun Akademik') {
+        function editForm(url, title = 'Edit Permission') {
             $.get(url)
                 .done(response => {
                     $(`${modal}`).modal('show');
