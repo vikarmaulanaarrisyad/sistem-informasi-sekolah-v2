@@ -1,12 +1,16 @@
 <table {{ $attributes->merge(['class' => 'table table-striped dt-responsive table-responsive nowrap mt-3']) }}>
     @isset($thead)
     <thead class="bg-primary">
-        {{ $thead }}
+        <tr>
+            {{ $thead }}
+        </tr>
     </thead>
     @endisset
 
     <tbody>
-        {{ $slot }}
+        <tr>
+            {{ $slot }}
+        </tr>
     </tbody>
 
     @isset($tfoot)

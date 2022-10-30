@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class RoleController extends Controller
 {
@@ -14,6 +18,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view ('admin.roles.index');
     }
 
@@ -24,6 +30,8 @@ class RoleController extends Controller
      */
     public function data(Request $request)
     {
+        abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $roles = Role::all();
 
         return datatables($roles)
@@ -36,8 +44,8 @@ class RoleController extends Controller
             })
             ->addColumn('aksi', function ($roles) {
                 return '
-                <button onclick="editForm(`' . route('permission.show', $roles->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
-                <button  onclick="deleteData(`' . route('permission.destroy', $roles->id) . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                <button onclick="editForm(`' . route('role.show', $roles->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
+                <button  onclick="deleteData(`' . route('role.destroy', $roles->id) . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>
                 ';
             })
             ->escapeColumns([])
@@ -62,7 +70,22 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        abort_if(Gate::denies('role_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required'
+        ],
+        [
+            'name.required' => 'Nama wajib diisi.'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Role Gagal Disimpan'],422);
+        }
+
+        Role::create(['name' => $request->name]);
+
+        return response()->json(['message' => 'Role Berhasil Disimpan']);
     }
 
     /**
@@ -71,9 +94,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        return response()->json(['data' => $role]);
     }
 
     /**
@@ -94,9 +119,23 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Role Gagal Disimpan.'], 422);
+        }
+
+        $data = [
+            'name' => $request->name,
+        ];
+
+        $role->update($data);
+
+        return response()->json(['message' => 'Role Berhasil Disimpan']);
     }
 
     /**
@@ -105,8 +144,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        
+        $role->delete();
+        return response()->json(['message' => 'Role Berhasil Dihapus.']);
     }
 }

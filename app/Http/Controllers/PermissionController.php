@@ -64,6 +64,8 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $validator = Validator::make($request->all(), [
             'name' => 'required'
         ]);

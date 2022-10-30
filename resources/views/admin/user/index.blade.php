@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Roles')
+@section('title', 'Users')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Roles List</li>
+    <li class="breadcrumb-item active">User List</li>
 @endsection
 
 @section('content')
@@ -12,19 +12,20 @@
     <div class="col-lg-12">
         <x-card>
             <x-slot name="header">
-                @can('role_create')
-                    <button onclick="addForm(`{{ route('role.store') }}`)" class="btn btn-sm btn-primary"><i
-                        class="fas fa-plus-circle"></i> Tambah Roles</button>
+                @can('user_create')
+                    <button onclick="addForm(`{{ route('users.store') }}`)" class="btn btn-sm btn-primary"><i
+                        class="fas fa-plus-circle"></i> Tambah User</button>
                     @endcan
             </x-slot>
 
             <x-table>
                 <x-slot name="thead">
-                    <th width="7%">No</th>
-                    <th>Role</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th width="15%">Aksi</th>
+                        <th width="5%">No</th>
+                        <th>Foto</th>
+                        <th>Nama</th>
+                        <th>email</th>
+                        <th>Role</th>
+                        <th>Aksi</th>
                 </x-slot>
             </x-table>
         </x-card>
@@ -42,20 +43,21 @@
 
         table = $('.table').DataTable({
             processing: true,
-            autoWidth: false,
+            autoWidth: true,
             ajax: {
-                url: '{{ route('admin.role.data') }}',
+                url: '{{ route('admin.user.data') }}',
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false},
+                {data: 'avatar'},
                 {data: 'name'},
-                {data: 'created_at'},
-                {data: 'updated_at'},
+                {data: 'email'},
+                {data: 'role'},
                 {data: 'aksi', sortable: false, searchable: false},
             ]
         });
 
-        function addForm (url, title = 'Tambah Roles') {
+        function addForm (url, title = 'Tambah User Baru') {
             $(modal).modal('show')
             $(`${modal} .modal-title`).text(title)
             $(`${modal} form`).attr('action',url)
@@ -64,7 +66,7 @@
         }
 
         
-        function editForm(url, title = 'Edit Roles') {
+        function editForm(url, title = 'Edit User') {
             $.get(url)
                 .done(response => {
                     $(`${modal}`).modal('show');

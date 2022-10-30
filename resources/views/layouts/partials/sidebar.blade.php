@@ -59,7 +59,7 @@
                         @endcan
                         @can('user_access')
                         <li class="nav-item">
-                            <a href="pages/charts/inline.html" class="nav-link">
+                            <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>User</p>
                             </a>
