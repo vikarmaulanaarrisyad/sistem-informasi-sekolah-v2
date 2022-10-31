@@ -21,8 +21,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <li class="nav-item menu-open">
-                    <a href="{{ route('dashboard') }}" class="nav-link active">
+                <li class="nav-item">
+                    <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -32,8 +32,8 @@
 
                 @can('user_management_access')
                 <li class="nav-header">MANAJEMEN USER</li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ set_active(['permission.index', 'role.index', 'users.index']) ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ set_active(['permission.index', 'role.index', 'users.index']) }}">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Management Users
@@ -43,7 +43,7 @@
                     <ul class="nav nav-treeview">
                         @can('permission_access')
                         <li class="nav-item">
-                            <a href="{{ route('permission.index') }}" class="nav-link">
+                            <a href="{{ route('permission.index') }}" class="nav-link {{ set_active(['permission.index']) }}">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>
@@ -51,7 +51,7 @@
                         @endcan
                         @can('role_access')
                         <li class="nav-item">
-                            <a href="{{ route('role.index') }}" class="nav-link">
+                            <a href="{{ route('role.index') }}" class="nav-link {{ set_active(['role.index']) }}">
                                 <i class="fas fa-briefcase nav-icon"></i>
                                 <p>Role</p>
                             </a>
@@ -59,7 +59,7 @@
                         @endcan
                         @can('user_access')
                         <li class="nav-item">
-                            <a href="{{ route('users.index') }}" class="nav-link">
+                            <a href="{{ route('users.index') }}" class="nav-link {{ set_active(['users.index']) }}">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>User</p>
                             </a>
@@ -76,7 +76,7 @@
                 @endhasrole
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('profil-sekolah.index') }}" class="nav-link {{ set_active(['profil-sekolah.index']) }}">
                         <i class="nav-icon fas fa-university"></i>
                         <p>
                             Profil Sekolah

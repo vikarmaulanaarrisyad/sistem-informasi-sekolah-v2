@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
@@ -195,7 +196,7 @@ class UserController extends Controller
         if ($request->password != '') {
             $data['password'] = Hash::make($request->password);
         }
-        
+
         DB::beginTransaction();
         try {
              // Step 1 : Create User

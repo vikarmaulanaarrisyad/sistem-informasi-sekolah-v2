@@ -4,6 +4,7 @@ use App\Http\Controllers\{
     DashboardController,
     PermissionController,
     RoleController,
+    SekolahController,
     UserController,
 };
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,10 @@ Route::group([
         // User
         Route::get('/users/data', [UserController::class, 'data'])->name('admin.user.data');
         Route::resource('/users', UserController::class);
+
+        // Profil Sekolah
+        Route::get('/profil-sekolah/data',[SekolahController::class,'data'])->name('admin.profil_sekolah.data');
+        Route::resource('/profil-sekolah', SekolahController::class);
         
     });
 });

@@ -29,6 +29,7 @@ function resetForm(selector) {
 
     if ($(selector).find('.img-thumbnail').length != 0) {
         $(selector).find('.img-thumbnail').attr('src', "");
+        $(selector).find('.custom-file-label').text('Choose file');
     }
 
     $('.select2').trigger('change');

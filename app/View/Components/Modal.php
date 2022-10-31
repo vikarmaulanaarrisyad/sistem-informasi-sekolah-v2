@@ -7,14 +7,16 @@ use Illuminate\View\Component;
 class Modal extends Component
 {
     public $size;
+    public $method;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($size = 'modal-md')
+    public function __construct($size = 'modal-md', $method= 'post')
     {
         $this->size = $size;
+        $this->method = $method;
     }
 
     /**
