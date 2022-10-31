@@ -1,4 +1,5 @@
-<table {{ $attributes->merge(['class' => 'table table-striped dt-responsive table-responsive nowrap mt-3']) }}>
+<div class="table-responsive">
+<table {{ $attributes->merge(['class' => 'table table-striped dt-responsive table-responsive nowrap']) }}>
     @isset($thead)
     <thead class="bg-primary">
         <tr>
@@ -19,3 +20,4 @@
     </tfoot>
     @endisset
 </table>
+</div>

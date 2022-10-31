@@ -91,7 +91,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        abort_if(Gate::denies('user_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('permission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response()->json(['data' => $permission]);
     }

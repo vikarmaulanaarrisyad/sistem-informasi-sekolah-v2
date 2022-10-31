@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-sm-12 col-md-12">
         <x-card>
             <x-slot name="header">
                 @can('user_create')
@@ -31,7 +31,7 @@
         </x-card>
     </div>
 </div>
-@include('admin.roles.form')
+@include('admin.user.form')
 @endsection
 
 @include('layouts.include.datatables')
@@ -65,7 +65,6 @@
             resetForm(`${modal} form`)
         }
 
-        
         function editForm(url, title = 'Edit User') {
             $.get(url)
                 .done(response => {
@@ -75,6 +74,14 @@
                     $(`${modal} [name=_method]`).val('PUT');
                     resetForm(`${modal} form`);
                     loopForm(response.data);
+
+                    let selectedRoles = [];
+                    response.data.role.forEach(item => {
+                        selectedRoles.push(item.id);
+                    });
+                    $('#roles')
+                        .val(selectedRoles)
+                        .trigger('change');
                 })
                 .fail(errors => {
                     Swal.fire({

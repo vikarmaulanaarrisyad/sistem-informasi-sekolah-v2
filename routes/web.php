@@ -42,7 +42,7 @@ Route::group([
         Route::resource('/role', RoleController::class);
 
         // User
-        Route::get('/user/data', [UserController::class, 'data'])->name('admin.user.data');
+        Route::get('/users/data', [UserController::class, 'data'])->name('admin.user.data');
         Route::resource('/users', UserController::class);
         
     });

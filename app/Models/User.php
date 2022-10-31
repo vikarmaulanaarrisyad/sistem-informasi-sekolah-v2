@@ -62,4 +62,11 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function scopeAdmin($query)
+    {
+        return $query->whereHas('roles', function ($q) {
+            $q->where('model_id', 1);
+        });
+    }
 }
