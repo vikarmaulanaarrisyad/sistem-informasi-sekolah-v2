@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
@@ -34,7 +35,9 @@ class UserController extends Controller
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $users = User::with('roles')->get();
+        $users = User::orderBy('name', 'asc')
+            ->filter($request)
+            ->get();
 
         return datatables($users)
             ->addIndexColumn()
@@ -187,9 +190,11 @@ class UserController extends Controller
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
-            'password' => bcrypt($request->password) ?? $user->password,
         ];
 
+        if ($request->password != '') {
+            $data['password'] = Hash::make($request->password);
+        }
         
         DB::beginTransaction();
         try {

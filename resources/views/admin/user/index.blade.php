@@ -13,10 +13,22 @@
         <x-card>
             <x-slot name="header">
                 @can('user_create')
-                    <button onclick="addForm(`{{ route('users.store') }}`)" class="btn btn-sm btn-primary"><i
-                        class="fas fa-plus-circle"></i> Tambah User</button>
-                    @endcan
+                <button onclick="addForm(`{{ route('users.store') }}`)" class="btn btn-sm btn-primary"><i
+                    class="fas fa-plus-circle"></i> Tambah User</button>
+                @endcan
             </x-slot>
+
+            <div class="d-flex mb-4">
+                <div class="form-group">
+                    <select name="roles2" id="roles2" class="custom-select rounded-5">
+                        <option disabled selected>Semua Role</option>
+                        @foreach ($roles as  $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
 
             <x-table>
                 <x-slot name="thead">
@@ -46,6 +58,9 @@
             autoWidth: true,
             ajax: {
                 url: '{{ route('admin.user.data') }}',
+                data: function (d) {
+                    d.roles = $('[name=roles2]').val();
+                }
             },
             columns: [
                 {data: 'DT_RowIndex', searchable: false},
@@ -179,6 +194,11 @@
                 }
             })
         }
+
+        // Filtering Data
+        $('[name=roles2]').on('change', function () {
+            table.ajax.reload();
+        })
 
     </script>
 @endpush
