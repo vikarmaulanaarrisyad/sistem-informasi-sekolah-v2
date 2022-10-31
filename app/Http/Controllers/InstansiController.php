@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sekolah;
+use App\Models\Instansi;
 use Illuminate\Http\Request;
 
-class SekolahController extends Controller
+class InstansiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class SekolahController extends Controller
      */
     public function index()
     {
-        return view ('admin.sekolah.index');
+        return view ('admin.instansi.index');
     }
 
     /**
@@ -41,10 +41,10 @@ class SekolahController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sekolah  $sekolah
+     * @param  \App\Models\Instansi  $instansi
      * @return \Illuminate\Http\Response
      */
-    public function show(Sekolah $sekolah)
+    public function show(Instansi $instansi)
     {
         //
     }
@@ -52,10 +52,10 @@ class SekolahController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sekolah  $sekolah
+     * @param  \App\Models\Instansi  $instansi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sekolah $sekolah)
+    public function edit(Instansi $instansi)
     {
         //
     }
@@ -64,10 +64,10 @@ class SekolahController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sekolah  $sekolah
+     * @param  \App\Models\Instansi  $instansi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sekolah $sekolah)
+    public function update(Request $request, Instansi $instansi)
     {
         //
     }
@@ -75,10 +75,10 @@ class SekolahController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sekolah  $sekolah
+     * @param  \App\Models\Instansi  $instansi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sekolah $sekolah)
+    public function destroy(Instansi $instansi)
     {
         //
     }

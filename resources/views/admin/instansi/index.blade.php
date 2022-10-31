@@ -1,23 +1,83 @@
 @extends('layouts.app')
 
-@section('title', 'Data Profil Sekolah')
+@section('title', 'Profil Sekolah')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Data Profil Sekolah</li>
+    <li class="breadcrumb-item active">Edit Profil Sekolah</li>
 @endsection
 
 @section('content')
 <div class="row">
-    <div class="col-sm-4 col-md-8">
-        <x-card>
-           
-        </x-card>
-    </div>
-    <div class="col-sm-4 col-md-4">
-        <x-card>
-           
-        </x-card>
+    <div class="col-lg-12 col-sm-12 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-school"></i> Edit Profil Sekolah</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">NSM Sekolah</label>
+                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">NPSN Sekolah</label>
+                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">Nama Sekolah</label>
+                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">Kepala Sekolah</label>
+                            <select name="" id="" class="custom-select">
+                                <option disabled selected>Pilih Kepala Sekolah</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">Alamat Sekolah</label>
+                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">Email Sekolah</label>
+                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">Logo Sekolah</label>
+                            <input type="file" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <label for="nama_sekolah">Email Sekolah</label>
+                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                 <button type="button" onclick="submitForm(this.form)" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Simpan</button>
+            </div>
+        </div>
     </div>
 </div>
 {{--  @include('admin.user.form')  --}}

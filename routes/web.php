@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\{
     DashboardController,
+    InstansiController,
     PermissionController,
     RoleController,
-    SekolahController,
     UserController,
 };
 use Illuminate\Support\Facades\Route;
@@ -47,8 +47,7 @@ Route::group([
         Route::resource('/users', UserController::class);
 
         // Profil Sekolah
-        Route::get('/profil-sekolah/data',[SekolahController::class,'data'])->name('admin.profil_sekolah.data');
-        Route::resource('/profil-sekolah', SekolahController::class);
+        Route::resource('/instansi', InstansiController::class);
         
     });
 });

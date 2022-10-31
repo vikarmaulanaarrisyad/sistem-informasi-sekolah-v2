@@ -76,7 +76,7 @@
                 @endhasrole
 
                 <li class="nav-item">
-                    <a href="{{ route('profil-sekolah.index') }}" class="nav-link {{ set_active(['profil-sekolah.index']) }}">
+                    <a href="{{ route('instansi.index') }}" class="nav-link {{ set_active(['instansi.index']) }}">
                         <i class="nav-icon fas fa-university"></i>
                         <p>
                             Profil Sekolah
