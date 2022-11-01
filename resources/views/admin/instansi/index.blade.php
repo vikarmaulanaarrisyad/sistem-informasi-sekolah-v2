@@ -10,77 +10,72 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <h4><i class="fas fa-school"></i> Edit Profil Sekolah</h4>
+        <form action="{{ route('instansi.store') }}" method="post">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-school"></i> Edit Profil Sekolah</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="nsm_instansi">NSM Sekolah</label>
+                                <input type="text" name="nsm_instansi" id="nsm_instansi" class="form-control" autocomplete="off" value="{{ $instansi->nsm_instansi }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="npsn_instansi">NPSN Sekolah</label>
+                                <input type="text" name="npsn_instansi" id="npsn_instansi" class="form-control" autocomplete="off" value="{{ $instansi->npsn_instansi }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="nama_instansi">Nama Sekolah</label>
+                                <input type="text" name="nama_instansi" id="nama_instansi" class="form-control" autocomplete="off" value="{{ $instansi->nama_instansi }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="nama_sekolah">Kepala Sekolah</label>
+                                <select name="" id="" class="custom-select">
+                                    <option disabled selected>Pilih Kepala Sekolah</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="alamat_instansi">Alamat Sekolah</label>
+                                <input type="text" name="alamat_instansi" id="alamat_instansi" class="form-control" autocomplete="off" value="{{ $instansi->alamat_instansi }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="email_instansi">Email Sekolah</label>
+                                <input type="text" name="email_instansi" id="email_instansi" class="form-control" autocomplete="off" value="{{ $instansi->email_instansi }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                <label for="logo_instansi">Logo Sekolah</label>
+                                <input type="file" name="logo_instansi" id="logo_instansi" class="form-control" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" onclick="submitForm(this.form)" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">NSM Sekolah</label>
-                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">NPSN Sekolah</label>
-                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">Nama Sekolah</label>
-                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">Kepala Sekolah</label>
-                            <select name="" id="" class="custom-select">
-                                <option disabled selected>Pilih Kepala Sekolah</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">Alamat Sekolah</label>
-                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">Email Sekolah</label>
-                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">Logo Sekolah</label>
-                            <input type="file" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <label for="nama_sekolah">Email Sekolah</label>
-                            <input type="text" name="" id="nama_sekolah" class="form-control" autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                 <button type="button" onclick="submitForm(this.form)" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Simpan</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
-{{--  @include('admin.user.form')  --}}
 @endsection
 
 @include('layouts.include.datatables')
@@ -156,7 +151,6 @@
                     processData: false
                 })
                 .done(response => {
-                    $(modal).modal('hide');
                     if (response.status = 200) {
                         Swal.fire({
                             icon: 'success',
@@ -165,8 +159,8 @@
                             showConfirmButton: false,
                             timer: 2000
                         })
+                        window.location.reload();
                     }
-                    table.ajax.reload();
                 })
                 .fail(errors => {
                     Swal.fire({
