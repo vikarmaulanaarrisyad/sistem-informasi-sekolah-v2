@@ -9,8 +9,9 @@
 
 @section('content')
 <div class="row">
-    <div class="col-lg-12 col-sm-12 col-md-12">
-        <form action="{{ route('instansi.store') }}" method="post">
+    <div class="col-lg-9 col-sm-9 col-md-9">
+        <form action="{{ route('instansi.update', $instansi->id) }}" method="post" enctype="multipart/form-data">
+            @method('PUT')
             <div class="card">
                 <div class="card-header">
                     <h4><i class="fas fa-school"></i> Edit Profil Sekolah</h4>
@@ -66,6 +67,7 @@
                                 <label for="logo_instansi">Logo Sekolah</label>
                                 <input type="file" name="logo_instansi" id="logo_instansi" class="form-control" autocomplete="off">
                             </div>
+                            <span class="text-warning">Upload file bertipe JPG, JPEG, PNG ukuran max 2 MB</span>
                         </div>
                     </div>
                 </div>
@@ -74,6 +76,15 @@
                 </div>
             </div>
         </form>
+    </div>
+
+    <div class="col-sm-3">
+        <x-card>
+            <x-slot name="header">
+                <h3 class="text-center">Logo Sekolah</h3>
+            </x-slot>
+            <img src="{{ Storage::url($instansi->logo_instansi) ?? '' }}" width="220px" height="100px" class="img-fluid">
+        </x-card>
     </div>
 </div>
 @endsection

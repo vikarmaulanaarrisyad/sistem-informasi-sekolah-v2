@@ -39,32 +39,7 @@ class InstansiController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nsm_instansi' => 'required|numeric',
-            'npsn_instansi' => 'required|numeric',
-            'nama_instansi' => 'required',
-            'email_instansi' => 'nullable|email',
-            'alamat_instansi' => 'nullable',
-            'logo_instansi' => 'mimes:jpg,png,jpeg|max:2048',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors(), 'message' => 'Tidak dapat menyimpan data'],422);
-        }
-
-        Instansi::updateOrCreate(
-            ['id' => 1,],
-            [
-                'nsm_instansi' => $request->nsm_instansi,
-                'npsn_instansi' => $request->npsn_instansi,
-                'nama_instansi' => $request->nama_instansi,
-                'email_instansi' => $request->email_instansi,
-                'alamat_instansi' => $request->alamat_instansi,
-                'logo_instansi' =>  upload('instansi',  $request->file($request->logo_instansi), 'instansi'),
-            ]
-        );
-
-        return response()->json(['message' => 'Instansi berhasil disimpan']);
+        // 
     }
 
     /**
@@ -98,7 +73,32 @@ class InstansiController extends Controller
      */
     public function update(Request $request, Instansi $instansi)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nsm_instansi' => 'required|numeric',
+            'npsn_instansi' => 'required|numeric',
+            'nama_instansi' => 'required',
+            'email_instansi' => 'nullable|email',
+            'alamat_instansi' => 'nullable',
+            'logo_instansi' => 'mimes:jpg,png,jpeg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Tidak dapat menyimpan data'],422);
+        }
+
+        $data = $request->except('logo_instansi');
+
+        if ($request->hasFile('logo_instansi')) {
+            if (Storage::disk('public')->exists($instansi->logo_instansi)) {
+                Storage::disk('public')->delete($instansi->logo_instansi);
+            }
+
+            $data['logo_instansi'] = upload('instansi',$request->file('logo_instansi'), 'logo');
+        }
+
+        $instansi->update($data);
+          
+        return response()->json(['message' => 'Instansi berhasil disimpan']);
     }
 
     /**
