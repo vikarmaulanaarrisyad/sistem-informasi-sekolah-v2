@@ -41,6 +41,38 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'user_delete']);
         Permission::create(['name' => 'user_access']); // index // submenu
 
+        // create permissions Instansi
+        Permission::create(['name' => 'instansi_management_access']); // menu utama
+        Permission::create(['name' => 'instansi_create']);
+        Permission::create(['name' => 'instansi_edit']);
+        Permission::create(['name' => 'instansi_show']);
+        Permission::create(['name' => 'instansi_delete']);
+        Permission::create(['name' => 'instansi_access']); // index // submenu
+
+        // create permissions Tahun Pelajaran
+        Permission::create(['name' => 'tahun_ajaran_management_access']); // menu utama
+        Permission::create(['name' => 'tahun_ajaran_create']);
+        Permission::create(['name' => 'tahun_ajaran_edit']);
+        Permission::create(['name' => 'tahun_ajaran_show']);
+        Permission::create(['name' => 'tahun_ajaran_delete']);
+        Permission::create(['name' => 'tahun_ajaran_access']); // index // submenu
+
+        // create permissions Kurikulum
+        Permission::create(['name' => 'kurikulum_management_access']); // menu utama
+        Permission::create(['name' => 'kurikulum_create']);
+        Permission::create(['name' => 'kurikulum_edit']);
+        Permission::create(['name' => 'kurikulum_show']);
+        Permission::create(['name' => 'kurikulum_delete']);
+        Permission::create(['name' => 'kurikulum_access']); // index // submenu
+
+        // create permissions Kelas
+        Permission::create(['name' => 'kelas_management_access']); // menu utama
+        Permission::create(['name' => 'kelas_create']);
+        Permission::create(['name' => 'kelas_edit']);
+        Permission::create(['name' => 'kelas_show']);
+        Permission::create(['name' => 'kelas_delete']);
+        Permission::create(['name' => 'kelas_access']); // index // submenu
+
         // create roles and assign created permissions
 
         // this can be done as separate statements

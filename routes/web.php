@@ -5,6 +5,7 @@ use App\Http\Controllers\{
     InstansiController,
     PermissionController,
     RoleController,
+    TahunajaranController,
     UserController,
 };
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,11 @@ Route::group([
 
         // Profil Sekolah
         Route::resource('/instansi', InstansiController::class);
+
+        // Tahun Ajaran
+        Route::get('/tahun-ajaran/data', [TahunajaranController::class, 'data'])->name('admin.tahun_ajaran.data');
+        Route::resource('/tahun-ajaran', TahunajaranController::class);
+        Route::put('/tahun-ajaran/{id}/update_status', [TahunajaranController::class, 'updateStatus'])->name('admin.tahun_ajaran.update_status');
         
     });
 });

@@ -3,7 +3,7 @@
         width="60">
 </div>
 
-<nav class="main-header navbar navbar-expand navbar-primary  navbar-dark border-bottom-0">
+<nav class="main-header navbar navbar-expand navbar-primary  navbar-dark border-bottom-0 fixed-top">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -11,8 +11,13 @@
         </li>
     </ul>
 
+    <div class="nav-item">
+        <span class="text-left"> Welcome To <b>{{ $instansi->nama_instansi }}</b></span>
+    </div>
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
+
 
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">

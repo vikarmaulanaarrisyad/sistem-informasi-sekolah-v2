@@ -85,7 +85,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('tahun-ajaran.index') }}" class="nav-link {{ set_active(['tahun-ajaran.index']) }}">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
                             Tahun Pelajaran
