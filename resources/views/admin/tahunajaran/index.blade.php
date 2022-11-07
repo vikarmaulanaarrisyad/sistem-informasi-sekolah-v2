@@ -33,7 +33,7 @@
         </div>
     </div>
 
-{{--  @include('admin.permission.form')  --}}
+@include('admin.tahunajaran.form')
 @endsection
 
 @include('layouts.include.datatables')

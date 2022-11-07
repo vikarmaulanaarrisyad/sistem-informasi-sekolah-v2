@@ -11,9 +11,9 @@ class Tahunajaran extends Model
     protected $table = 'tahun_ajaran';
     protected $guarded = [];
 
-    public function scopeActive()
+    public function scopeActive($query)
     {
-        return $this->where('is_active',1);
+        return $$query->where('is_active', 1);
     }
 
 

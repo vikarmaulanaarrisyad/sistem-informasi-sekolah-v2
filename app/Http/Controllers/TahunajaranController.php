@@ -6,6 +6,7 @@ use App\Models\Tahunajaran;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class TahunajaranController extends Controller
 {
@@ -25,14 +26,23 @@ class TahunajaranController extends Controller
     {
         abort_if(Gate::denies('tahun_ajaran_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $tahunAjaran = Tahunajaran::all();
+        $tahunAjaran = Tahunajaran::orderBy('created_at', 'ASC')->get();
         return datatables($tahunAjaran)
             ->addIndexColumn()
+            ->editColumn('nama', function ($tahunAjaran) {
+                return $tahunAjaran->nama .' '. $tahunAjaran->is_semester;
+            })
             ->editColumn('is_active', function ($tahunAjaran) {
                 return '
                     <button data-nama="'.$tahunAjaran->nama.'" id="updateStatus" onclick="updateStatus(`' . route('admin.tahun_ajaran.update_status', $tahunAjaran->id) . '`)"
                     class="btn btn-xs updateStatus btn-'.$tahunAjaran->statusColor() . '">'. $tahunAjaran->statusText() .'</button>
                 ';
+            })
+            ->editColumn('created_at', function ($tahunAjaran) {
+                return tanggal_indonesia($tahunAjaran->created_at);
+            })
+            ->editColumn('updated_at', function ($tahunAjaran) {
+                return tanggal_indonesia($tahunAjaran->updated_at);
             })
             ->addColumn('aksi', function ($tahunAjaran) {
                 $aksi = '';
@@ -70,7 +80,29 @@ class TahunajaranController extends Controller
     public function store(Request $request)
     {
         abort_if(Gate::denies('tahun_ajaran_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        //
+        
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|min:5',
+            'is_semester' => 'required|in:Ganjil,Genap'
+        ],
+        [
+            'is_semester.required' => 'Semester wajib diisi.',
+            'is_semester.in' => 'Semester yang dipilih tidak valid.'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Gagal menyimpan data'],422);
+        }
+
+        $data = [
+            'nama' => $request->nama,
+            'is_active' => 0,
+            'is_semester' => $request->is_semester
+        ];
+
+        Tahunajaran::create($data);
+
+        return response()->json(['message' => 'Tahun Pelajaran Berhasil Disimpan']);
     }
 
     /**
@@ -79,11 +111,12 @@ class TahunajaranController extends Controller
      * @param  \App\Models\Tahunajaran  $tahunajaran
      * @return \Illuminate\Http\Response
      */
-    public function show(Tahunajaran $tahunajaran)
+    public function show($id)
     {
         abort_if(Gate::denies('tahun_ajaran_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        //
+        $tahunAjaran = Tahunajaran::findOrfail($id);
+        return response()->json(['data' => $tahunAjaran]);
     }
 
     /**
@@ -104,9 +137,30 @@ class TahunajaranController extends Controller
      * @param  \App\Models\Tahunajaran  $tahunajaran
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tahunajaran $tahunajaran)
+    public function update(Request $request, $id)
     {
-        //
+        $tahunPelajaran = Tahunajaran::findOrfail($id);
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|min:5',
+            'is_semester' => 'required'
+        ],
+        [
+            'is_semester.required' => 'Semester wajib diisi.'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors(), 'message' => 'Gagal menyimpan data'],422);
+        }
+
+        $data = [
+            'nama' => $request->nama,
+            'is_semester' => $request->is_semester
+        ];
+
+        $tahunPelajaran->update($data);
+
+        return response()->json(['message' => 'Tahun Pelajaran Berhasil Disimpan']);
     }
 
     /**
@@ -115,15 +169,18 @@ class TahunajaranController extends Controller
      * @param  \App\Models\Tahunajaran  $tahunajaran
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tahunajaran $tahunajaran)
+    public function destroy($id)
     {
-        abort_if(Gate::denies('tahun_ajaran_destroy'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('tahun_ajaran_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        if ($tahunajaran->active()) {
-            $tahunajaran->delete();
+        $tahunPelajaran = Tahunajaran::findOrfail($id);
+
+        if ($tahunPelajaran->is_active == 0) {
+            $tahunPelajaran->delete();
+            return response()->json(['message' => 'Tahun Pelajaran Berhasil Dihapus']);
         } 
 
-        return response()->json(['message' => 'Tahun Ajaran Tidak Dapat Dihapus'],400);
+        return response()->json(['message' => 'Tahun Pelajaran Gagal Dihapus'],400);
     }
 
     public function updateStatus($id) {

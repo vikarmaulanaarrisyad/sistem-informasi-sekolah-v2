@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tahun_ajaran', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('is_semester')->default(1)->comment('1 Ganjil');
+            $table->enum('is_semester', ['Ganjil','Genap']);
             $table->integer('is_active')->default(0)->comment('0 tidak aktif');
             $table->timestamps();
         });
