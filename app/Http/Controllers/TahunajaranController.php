@@ -186,11 +186,16 @@ class TahunajaranController extends Controller
     public function updateStatus($id) {
         $tahunAjaran = Tahunajaran::all();
 
+        $tahunPelajaran = Tahunajaran::find($id);
+
+        if ($tahunPelajaran->is_active != 0) {
+            return response()->json(['message' => 'Tahun Pelajaran Sudah Diaktifkan'],401);
+        }
+
         foreach ($tahunAjaran as $item) {
             $item->update(['is_active' => 0]);
         }
 
-        $tahunPelajaran = Tahunajaran::find($id);
         $tahunPelajaran->update(['is_active' => 1]);
 
         return response()->json(['message' => 'Tahun Pelajaran Berhasil Diaktifkan']);

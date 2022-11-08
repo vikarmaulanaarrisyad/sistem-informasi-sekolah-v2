@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tahun_ajaran_id')->nullable();
             $table->string('nama_kurikulum');
-            $table->integer('is_active')->default(0);
             $table->timestamps();
         });
     }

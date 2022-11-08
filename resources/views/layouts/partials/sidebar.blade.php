@@ -3,7 +3,7 @@
     <a href="{{ route('dashboard') }}" class="brand-link bg-primary">
         <img src="{{ Storage::url($instansi->logo_instansi) }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8">
-        <span class="brand-text font-weight-light">{{  config('app.name') }}</span>
+        <span class="brand-text font-weight-light">Sistem Informasi</span>
     </a>
 
     <!-- Sidebar -->
@@ -94,7 +94,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('kurikulum.index') }}" class="nav-link {{ set_active(['kurikulum.index']) }}">
                         <i class="nav-icon fas fa-book"></i>
                         <p>
                             Kurikulum

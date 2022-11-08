@@ -3,7 +3,7 @@
         width="60">
 </div>
 
-<nav class="main-header navbar navbar-expand navbar-primary  navbar-dark border-bottom-0 fixed-top">
+<nav class="main-header navbar navbar-expand navbar-primary  navbar-dark border-bottom-0">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">

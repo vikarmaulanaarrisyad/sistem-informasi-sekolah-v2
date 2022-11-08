@@ -20,7 +20,8 @@ class InstansiTableSeeder extends Seeder
             'npsn_instansi' => '60713624',
             'nama_instansi' => 'MIS Ikhsaniyah Lebeteng',
             'email_instansi' => 'milebeteng@gmail.com',
-            'alamat_instansi' => 'Desa Lebeteng'
+            'alamat_instansi' => 'Desa Lebeteng',
+            'logo_instansi' => 'default.jpeg'
         ]);
     }
 }

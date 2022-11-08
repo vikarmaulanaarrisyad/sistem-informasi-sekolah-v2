@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Tahun Ajaran')
+@section('title', 'Kurikulum')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Tahun Ajaran</li>
+    <li class="breadcrumb-item active">Kurikulum</li>
 @endsection
 
 @section('content')
@@ -12,9 +12,9 @@
         <div class="col-lg-12">
             <x-card>
                 <x-slot name="header">
-                    @can('tahun_ajaran_create')
-                    <button onclick="addForm(`{{ route('tahun-ajaran.store') }}`)" class="btn btn-sm btn-primary"><i
-                        class="fas fa-plus-circle"></i> Tambah Tahun Ajaran</button>
+                    @can('kurikulum_store')
+                    <button onclick="addForm(`{{ route('kurikulum.store') }}`)" class="btn btn-sm btn-primary"><i
+                        class="fas fa-plus-circle"></i> Tambah Kurikulum</button>
                     @endcan
 
                 </x-slot>
@@ -23,7 +23,7 @@
                     <x-slot name="thead">
                         <th width="5%">No</th>
                         <th>Tahun Pelajaran</th>
-                        <th>Status</th>
+                        <th>Kurikulum</th>
                         <th>Created At</th>
                         <th>Updated At</th>
                         <th width="15%" style="text-align: center">Aksi</th>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-@include('admin.tahunajaran.form')
+@include('admin.kurikulum.form')
 @endsection
 
 @include('layouts.include.datatables')
@@ -47,19 +47,19 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('admin.tahun_ajaran.data') }}'
+                url: '{{ route('admin.kurikulum.data') }}'
             },
             columns: [
                 {data: 'DT_RowIndex' , searchable: false},
-                {data: 'nama'},
-                {data: 'is_active'},
+                {data: 'tahun_ajaran'},
+                {data: 'nama_kurikulum'},
                 {data: 'created_at'},
                 {data: 'updated_at'},
                 {data: 'aksi', seacrhable: false, sortable: false},
                 ]
         });
         
-        function addForm(url, title = 'Tambah Tahun Ajaran') {
+        function addForm(url, title = 'Tambah Kurikulum') {
             $(modal).modal('show'); 
             $(`${modal} .modal-title`).text(title); 
             $(`${modal} form`).attr('action', url); 
@@ -67,7 +67,7 @@
             resetForm(`${modal} form`);
         }
 
-        function editForm(url, title = 'Edit Tahun Ajaran') {
+        function editForm(url, title = 'Edit Kurikulum') {
             $.get(url)
                 .done(response => {
                     $(`${modal}`).modal('show');

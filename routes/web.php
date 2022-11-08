@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     DashboardController,
     InstansiController,
+    KurikulumController,
     PermissionController,
     RoleController,
     TahunajaranController,
@@ -37,23 +38,26 @@ Route::group([
     ], function () {
         // Permission
         Route::get('/permission/data', [PermissionController::class, 'data'])->name('admin.permission.data');
-        Route::resource('permission', PermissionController::class);
+        Route::resource('permission', PermissionController::class)->except('edit','create');
 
         // Role
         Route::get('/role/data', [RoleController::class, 'data'])->name('admin.role.data');
-        Route::resource('/role', RoleController::class);
+        Route::resource('/role', RoleController::class)->except('edit','create');
 
         // User
         Route::get('/users/data', [UserController::class, 'data'])->name('admin.user.data');
-        Route::resource('/users', UserController::class);
+        Route::resource('/users', UserController::class)->except('edit','create');
 
         // Profil Sekolah
-        Route::resource('/instansi', InstansiController::class);
+        Route::resource('/instansi', InstansiController::class)->except('edit','create','destroy','store');
 
         // Tahun Ajaran
         Route::get('/tahun-ajaran/data', [TahunajaranController::class, 'data'])->name('admin.tahun_ajaran.data');
-        Route::resource('/tahun-ajaran', TahunajaranController::class);
+        Route::resource('/tahun-ajaran', TahunajaranController::class)->except('edit','create');
         Route::put('/tahun-ajaran/{id}/update_status', [TahunajaranController::class, 'updateStatus'])->name('admin.tahun_ajaran.update_status');
         
+        // Kurikulum
+        Route::get('/kurikulum/data', [KurikulumController::class, 'data'])->name('admin.kurikulum.data');
+        Route::resource('/kurikulum', KurikulumController::class)->except('edit','create');
     });
 });
