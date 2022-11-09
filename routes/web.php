@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     KurikulumController,
     PermissionController,
     RoleController,
+    RuanganController,
     TahunajaranController,
     UserController,
 };
@@ -60,6 +61,10 @@ Route::group([
         // Kurikulum
         Route::get('/kurikulum/data', [KurikulumController::class, 'data'])->name('admin.kurikulum.data');
         Route::resource('/kurikulum', KurikulumController::class)->except('edit','create');
+
+        // Ruangan
+        Route::get('/sarana-prasarana/ruangan/data', [RuanganController::class, 'data'])->name('admin.ruangan.data');
+        Route::resource('/sarana-prasarana/ruangan', RuanganController::class)->except('create','edit');
 
         // Kelas
         Route::get('/sarana-prasarana/kelas/data', [KelasController::class, 'data'])->name('admin.kelas.data');

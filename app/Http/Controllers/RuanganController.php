@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jenisruang;
 use App\Models\Ruangan;
 use Illuminate\Http\Request;
 
@@ -14,18 +15,26 @@ class RuanganController extends Controller
      */
     public function index()
     {
-        //
+        $jenisRuangan = Jenisruang::all();
+        
+        return view ('admin.ruangan.index', compact('jenisRuangan'));
+    }
+    public function data(Request $request)
+    {
+        $ruangan = Ruangan::orderBy('nama_ruangan','ASC')->get();
+
+        return datatables($ruangan)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($ruangan) {
+                return '
+                <button onclick="editForm(`' . route('ruangan.show', $ruangan->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
+                <button  onclick="deleteData(`' . route('ruangan.destroy', $ruangan->id) . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>';
+                
+            })
+            ->escapeColumns([])
+            ->make(true);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.

@@ -32,6 +32,8 @@ class KelasController extends Controller
 
     public function data(Request $request)
     {
+        abort_if(Gate::denies('kelas_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $kelas = Kelas::orderBy('nama_kelas','ASC')
             ->filter($request)
             ->get();

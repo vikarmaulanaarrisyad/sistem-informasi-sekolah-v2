@@ -102,8 +102,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ set_active(['kelas.index']) ? 'menu-is-opening menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ set_active(['kelas.index']) }}">
+                <li class="nav-item {{ set_active(['kelas.index','ruangan.index']) ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ set_active(['kelas.index', 'ruangan.index']) }}">
                         <i class="nav-icon fas fa-building"></i>
                         <p>
                             Sarana Prasarana
@@ -112,7 +112,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ route('ruangan.index') }}" class="nav-link {{ set_active(['ruangan.index']) }}">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Ruangan</p>
                             </a>
