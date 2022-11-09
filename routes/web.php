@@ -3,6 +3,7 @@
 use App\Http\Controllers\{
     DashboardController,
     InstansiController,
+    KelasController,
     KurikulumController,
     PermissionController,
     RoleController,
@@ -59,5 +60,9 @@ Route::group([
         // Kurikulum
         Route::get('/kurikulum/data', [KurikulumController::class, 'data'])->name('admin.kurikulum.data');
         Route::resource('/kurikulum', KurikulumController::class)->except('edit','create');
+
+        // Kelas
+        Route::get('/kelas/data', [KelasController::class, 'data'])->name('admin.kelas.data');
+        Route::resource('/kelas', KelasController::class)->except('create','edit');
     });
 });

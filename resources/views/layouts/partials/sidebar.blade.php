@@ -103,7 +103,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('kelas.index') }}" class="nav-link {{ set_active(['kelas.index']) }}">
                         <i class="nav-icon fas fa-school"></i>
                         <p>
                             Kelas
