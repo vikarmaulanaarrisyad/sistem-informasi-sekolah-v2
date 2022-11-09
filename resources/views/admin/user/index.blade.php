@@ -12,23 +12,27 @@
     <div class="col-sm-12 col-md-12">
         <x-card>
             <x-slot name="header">
-                @can('user_create')
-                <button onclick="addForm(`{{ route('users.store') }}`)" class="btn btn-sm btn-primary"><i
-                    class="fas fa-plus-circle"></i> Tambah User</button>
-                @endcan
-            </x-slot>
-
-            <div class="d-flex mb-4">
-                <div class="form-group">
-                    <select name="roles2" id="roles2" class="custom-select rounded-5">
-                        <option disabled selected>Semua Role</option>
-                        @foreach ($roles as  $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                        @endforeach
-                    </select>
+                <div class="d-flex flex-column">
+                    <div class="row">
+                        <div class="col-9">
+                            @can('user_create')
+                            <button onclick="addForm(`{{ route('users.store') }}`)" class="btn btn-sm btn-primary"><i
+                                class="fas fa-plus-circle"></i> Tambah User</button>
+                            @endcan
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <select name="roles2" id="roles2" class="custom-select text-sm float-right ">
+                                    <option disabled selected>Pilih Role</option>
+                                    @foreach ($roles as  $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
+            </x-slot>
 
             <x-table>
                 <x-slot name="thead">
@@ -195,10 +199,10 @@
             })
         }
 
-        // Filtering Data
-        $('[name=roles2]').on('change', function () {
-            table.ajax.reload();
-        })
+            // Filtering Data
+            $('[name=roles2]').on('change', function () {
+                table.ajax.reload();
+            })
 
     </script>
 @endpush

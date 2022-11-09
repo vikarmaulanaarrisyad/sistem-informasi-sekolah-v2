@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-3 ">
                                 <div class="form-group">
-                                    <select name="tahun_pelajaran" id="tahun_pelajaran" class="custom-select text-sm float-right">
+                                    <select name="tahunpelajaran2" id="tahunpelajaran2" class="custom-select text-sm float-right">
                                         <option disbaled selected>Pilih Tahun Pelajaran</option>
                                         @foreach ($getAllTahunAjaran as $tahunPelajaran )
                                             <option value="{{ $tahunPelajaran->id }}">{{ $tahunPelajaran->nama }} {{ $tahunPelajaran->is_semester }}</option>
@@ -62,7 +62,11 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('admin.kelas.data') }}'
+                url: '{{ route('admin.kelas.data') }}',
+                data: function (d) {
+                    d.tahunpelajaran = $('[name=tahunpelajaran2]').val()
+                },
+            
             },
             columns: [
                 {data: 'DT_RowIndex' , searchable: false},
@@ -187,6 +191,13 @@
                 }
             })
         }
+
+               // Filtering Data
+        $('[name=tahunpelajaran2]').on('change', function () {
+            table.ajax.reload();
+        })
+
+    
 
         function updateStatus (url) {
             const swalWithBootstrapButtons = Swal.mixin({

@@ -29,10 +29,11 @@ class KelasController extends Controller
         return view ('admin.kelas.index')->with($data);
     }
 
-    public function data()
+    public function data(Request $request)
     {
-        $tahunAjaranAktif = Tahunajaran::active()->first();
-        $kelas = Kelas::where('tahun_ajaran_id', $tahunAjaranAktif->id)->get();
+        $kelas = Kelas::orderBy('nama_kelas','ASC')
+            ->filter($request)
+            ->get();
 
         return datatables($kelas)
             ->addIndexColumn()

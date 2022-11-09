@@ -25,4 +25,12 @@ class Kelas extends Model
     {
         return $this->belongsTo(Guru::class);
     }
+
+    public function scopeFilter($query, $request)
+    {
+        return $query->when($request->has('tahunpelajaran') && $request->tahunpelajaran != '', function ($query) use ($request) {
+            $query->where('tahun_ajaran_id',$request->tahunpelajaran);
+        });
+
+    }
 }
