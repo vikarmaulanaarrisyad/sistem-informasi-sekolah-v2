@@ -11,11 +11,15 @@ class Tahunajaran extends Model
     protected $table = 'tahun_ajaran';
     protected $guarded = [];
 
+    public function kurikulum()
+    {
+        return $this->hasOne(Kurikulum::class,'tahun_ajaran_id', 'id');
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
     }
-
 
     public function statusColor()
     {

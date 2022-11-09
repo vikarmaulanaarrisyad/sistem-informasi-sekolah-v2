@@ -114,6 +114,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
         ];
 
+        $roleKepalaSekolah = User::role('kepala sekolah')->first();
+
         
         DB::beginTransaction();
         try {
@@ -121,6 +123,9 @@ class UserController extends Controller
              $user = User::create($data);
 
             // Step 2 : create Role
+            if ($request->role == 'kepala sekolah' && $roleKepalaSekolah > 0 || $roleKepalaSekolah != null) {
+                return response()->json(['message' => 'Akun kepala sekolah sudah ada sebelumnya'],422);    
+            }
             $user->assignRole($request->role);
 
             DB::commit();
@@ -191,6 +196,8 @@ class UserController extends Controller
             'username' => $request->username,
             'email' => $request->email,
         ];
+
+        $roleKepalaSekolah = User::role('kepala sekolah')->first();
 
         if ($request->password != '') {
             $data['password'] = Hash::make($request->password);

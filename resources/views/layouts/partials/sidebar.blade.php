@@ -102,14 +102,50 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item {{ set_active(['kelas.index']) ? 'menu-is-opening menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ set_active(['kelas.index']) }}">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>
+                            Sarana Prasarana
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Ruangan</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="{{ route('kelas.index') }}" class="nav-link {{ set_active(['kelas.index']) }}">
+                                <i class="fas fa-school nav-icon"></i>
+                                <p>Kelas</p>
+                            </a>
+                        </li> 
+                        <li class="nav-item">
+                            <a href="pages/charts/chartjs.html" class="nav-link">
+                                <i class="fas fa-briefcase nav-icon"></i>
+                                <p>Sarana Administrasi</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/charts/inline.html" class="nav-link">
+                                <i class="fas fa-user nav-icon"></i>
+                                <p>Sarana Pembelajaran</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>                
+
+                {{--  <li class="nav-item">
                     <a href="{{ route('kelas.index') }}" class="nav-link {{ set_active(['kelas.index']) }}">
                         <i class="nav-icon fas fa-school"></i>
                         <p>
                             Kelas
                         </p>
                     </a>
-                </li>
+                </li>  --}}
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -130,7 +166,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('permission.index') }}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>
@@ -160,7 +196,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('permission.index') }}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>

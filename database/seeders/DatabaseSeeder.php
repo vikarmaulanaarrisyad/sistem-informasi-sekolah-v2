@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Jenisruang;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,7 +22,9 @@ class DatabaseSeeder extends Seeder
             InstansiTableSeeder::class,
             TahunAjaranTableSeeder::class,
             KurikulumTableSeeder::class,
-            KelasTableSeeder::class
+            JenisRuangTableSeeder::class,
+            RuanganTableSeeder::class,
+            KelasTableSeeder::class,
         ]);
     }
 }

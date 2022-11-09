@@ -62,7 +62,9 @@ Route::group([
         Route::resource('/kurikulum', KurikulumController::class)->except('edit','create');
 
         // Kelas
-        Route::get('/kelas/data', [KelasController::class, 'data'])->name('admin.kelas.data');
-        Route::resource('/kelas', KelasController::class)->except('create','edit');
+        Route::get('/sarana-prasarana/kelas/data', [KelasController::class, 'data'])->name('admin.kelas.data');
+        Route::resource('/sarana-prasarana/kelas', KelasController::class)->except('create','edit');
+
+        // Rombel
     });
 });

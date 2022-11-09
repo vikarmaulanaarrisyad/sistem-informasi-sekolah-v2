@@ -23,9 +23,10 @@ class KelasController extends Controller
 
         $data = [
             'guru' => Guru::all(),
-            'tahunAjaran' => Tahunajaran::active()->first(),
+            'tahunAjaran' => Tahunajaran::with('kurikulum')->active()->first(),
             'getAllTahunAjaran' => Tahunajaran::all()
         ];
+
         return view ('admin.kelas.index')->with($data);
     }
 

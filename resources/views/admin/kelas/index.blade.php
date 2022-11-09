@@ -23,9 +23,9 @@
                             <div class="col-3 ">
                                 <div class="form-group">
                                     <select name="tahunpelajaran2" id="tahunpelajaran2" class="custom-select text-sm float-right">
-                                        <option disbaled selected>Pilih Tahun Pelajaran</option>
+                                        <option disabled selected>Pilih Tahun Pelajaran</option>
                                         @foreach ($getAllTahunAjaran as $tahunPelajaran )
-                                            <option value="{{ $tahunPelajaran->id }}">{{ $tahunPelajaran->nama }} {{ $tahunPelajaran->is_semester }}</option>
+                                            <option value="{{ $tahunPelajaran->id }}" {{ $tahunPelajaran->is_active == 1 ? 'selected' : '' }}>{{ $tahunPelajaran->nama }} {{ $tahunPelajaran->is_semester }}</option>
                                         @endforeach
                                     </select>
                                 </div>
