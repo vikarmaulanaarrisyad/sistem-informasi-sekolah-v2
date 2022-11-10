@@ -25,7 +25,7 @@ class PermissionController extends Controller
 
     public function data () {
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
+
         $permission = Permission::all();
 
         return datatables($permission)

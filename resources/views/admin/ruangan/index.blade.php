@@ -12,8 +12,8 @@
         <div class="col-lg-12">
             <x-card>
                 <x-slot name="header">
-                    @can('kelas_store')
-                    <button onclick="addForm(`{{ route('kelas.store') }}`)" class="btn btn-sm btn-primary"><i
+                    @can('ruangan_store')
+                    <button onclick="addForm(`{{ route('ruangan.index') }}`)" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus-circle"></i> Tambah Ruangan</button>
                     @endcan
 
@@ -26,7 +26,7 @@
                         <th>Nama Ruangan</th>
                         <th>Panjang</th>
                         <th>Lebar</th>
-                        <th>Gambar</th>
+                        <th width="10%">Gambar</th>
                         <th width="15%" style="text-align: center">Aksi</th>
                     </x-slot>
                 </x-table>
@@ -38,6 +38,8 @@
 @endsection
 
 @include('layouts.include.datatables')
+@include('layouts.include.datepicker')
+@include('layouts.include.select2')
 
 @push('scripts')
     <script>
@@ -48,7 +50,7 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('admin.ruangan.data') }}',           
+                url: '{{ route('admin.ruangan.data') }}',
             },
             columns: [
                 {data: 'DT_RowIndex' , searchable: false},
@@ -60,11 +62,11 @@
                 {data: 'aksi', seacrhable: false, sortable: false},
                 ]
         });
-        
+
         function addForm(url, title = 'Tambah Kelas') {
-            $(modal).modal('show'); 
-            $(`${modal} .modal-title`).text(title); 
-            $(`${modal} form`).attr('action', url); 
+            $(modal).modal('show');
+            $(`${modal} .modal-title`).text(title);
+            $(`${modal} form`).attr('action', url);
             $(`${modal} [name=_method]`).val('POST');
             resetForm(`${modal} form`);
         }
@@ -181,7 +183,7 @@
             table.ajax.reload();
         })
 
-    
+
 
         function updateStatus (url) {
             const swalWithBootstrapButtons = Swal.mixin({
@@ -234,3 +236,4 @@
 
     </script>
 @endpush
+
