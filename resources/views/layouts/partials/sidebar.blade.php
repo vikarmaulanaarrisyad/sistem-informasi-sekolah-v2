@@ -47,7 +47,7 @@
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>
-                        </li> 
+                        </li>
                         @endcan
                         @can('role_access')
                         <li class="nav-item">
@@ -66,7 +66,7 @@
                         </li>
                         @endcan
                     </ul>
-                </li> 
+                </li>
                 @endcan
 
                 @hasrole('admin')
@@ -75,6 +75,7 @@
                 <li class="nav-header">MENU USER</li>
                 @endhasrole
 
+                @can('instansi_access')
                 <li class="nav-item">
                     <a href="{{ route('instansi.index') }}" class="nav-link {{ set_active(['instansi.index']) }}">
                         <i class="nav-icon fas fa-university"></i>
@@ -83,7 +84,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
 
+                @can('tahun_ajaran_access')
                 <li class="nav-item">
                     <a href="{{ route('tahun-ajaran.index') }}" class="nav-link {{ set_active(['tahun-ajaran.index']) }}">
                         <i class="nav-icon fas fa-calendar-alt"></i>
@@ -92,7 +95,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
 
+                @can('kurikulum_access')
                 <li class="nav-item">
                     <a href="{{ route('kurikulum.index') }}" class="nav-link {{ set_active(['kurikulum.index']) }}">
                         <i class="nav-icon fas fa-book"></i>
@@ -101,7 +106,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
 
+                @can('sarana_prasarana_management_access')
                 <li class="nav-item {{ set_active(['kelas.index','ruangan.index']) ? 'menu-is-opening menu-open' : '' }}">
                     <a href="#" class="nav-link {{ set_active(['kelas.index', 'ruangan.index']) }}">
                         <i class="nav-icon fas fa-building"></i>
@@ -111,42 +118,46 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('ruangan_access')
                         <li class="nav-item">
                             <a href="{{ route('ruangan.index') }}" class="nav-link {{ set_active(['ruangan.index']) }}">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Ruangan</p>
                             </a>
-                        </li> 
+                        </li>
+                        @endcan
+
+                        @can('kelas_access')
                         <li class="nav-item">
                             <a href="{{ route('kelas.index') }}" class="nav-link {{ set_active(['kelas.index']) }}">
                                 <i class="fas fa-school nav-icon"></i>
                                 <p>Kelas</p>
                             </a>
-                        </li> 
+                        </li>
+                        @endcan
+
+                        @can('sarana_administrasi_access')
                         <li class="nav-item">
                             <a href="pages/charts/chartjs.html" class="nav-link">
                                 <i class="fas fa-briefcase nav-icon"></i>
                                 <p>Sarana Administrasi</p>
                             </a>
                         </li>
+                        @endcan
+
+                        @can('sarana_pembelajaran_access')
                         <li class="nav-item">
                             <a href="pages/charts/inline.html" class="nav-link">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>Sarana Pembelajaran</p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
-                </li>                
+                </li>
+                @endcan
 
-                {{--  <li class="nav-item">
-                    <a href="{{ route('kelas.index') }}" class="nav-link {{ set_active(['kelas.index']) }}">
-                        <i class="nav-icon fas fa-school"></i>
-                        <p>
-                            Kelas
-                        </p>
-                    </a>
-                </li>  --}}
-
+                @can('rombel_access')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -155,7 +166,9 @@
                         </p>
                     </a>
                 </li>
+                @endcan
 
+                @can('peserta_didik_access')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user-friends"></i>
@@ -165,56 +178,100 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('siswa_access')
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
-                                <p>Permissions</p>
+                                <p>Daftar Siswa</p>
                             </a>
-                        </li> 
+                        </li>
+                        @endcan
+
+                        @can('mutasi_masuk_access')
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
-                                <i class="fas fa-briefcase nav-icon"></i>
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Mutasi Masuk</p>
                             </a>
                         </li>
+                        @endcan
+
+                        @can('mutasi_keluar_access')
                         <li class="nav-item">
-                            <a href="pages/charts/inline.html" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Mutasi Keluar</p>
                             </a>
                         </li>
-                    </ul>
-                </li> 
+                        @endcan
 
+                        @can('kenaikan_kelas_access')
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Kenaikan Kelas</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('kelulusan_access')
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Kelulusan</p>
+                            </a>
+                        </li>
+                        @endcan
+
+                        @can('alumni_access')
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
+                                <p>Daftar Alumni</p>
+                            </a>
+                        </li>
+                        @endcan
+                    </ul>
+                </li>
+                @endcan
+
+                @can('guru_tenaga_access')
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-graduation-cap"></i>
                         <p>
-                            GTK
+                            Guru dan Tenaga
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        @can('gtk_access')
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Permissions</p>
                             </a>
-                        </li> 
+                        </li>
+                        @endcan
+                        @can('mutasi_gtk_masuk_access')
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
-                                <i class="fas fa-briefcase nav-icon"></i>
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Mutasi Masuk</p>
                             </a>
                         </li>
+                        @endcan
+                        @can('mutasi_gtk_keluar_access')
                         <li class="nav-item">
-                            <a href="pages/charts/inline.html" class="nav-link">
-                                <i class="fas fa-user nav-icon"></i>
+                            <a href="" class="nav-link">
+                                <i class="fas fa-unlock-alt nav-icon"></i>
                                 <p>Mutasi Keluar</p>
                             </a>
                         </li>
+                        @endcan
                     </ul>
-                </li> 
+                </li>
+                @endcan
                 {{--  <li class="nav-header">KELOLA DATA</li>  --}}
                 <li class="nav-item">
                     <a href="#" onclick="document.querySelector('#form-logout').submit()" class="nav-link">

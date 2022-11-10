@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     KurikulumController,
     PermissionController,
     RoleController,
+    RombelController,
     RuanganController,
     TahunajaranController,
     UserController,
@@ -57,7 +58,7 @@ Route::group([
         Route::get('/tahun-ajaran/data', [TahunajaranController::class, 'data'])->name('admin.tahun_ajaran.data');
         Route::resource('/tahun-ajaran', TahunajaranController::class)->except('edit','create');
         Route::put('/tahun-ajaran/{id}/update_status', [TahunajaranController::class, 'updateStatus'])->name('admin.tahun_ajaran.update_status');
-        
+
         // Kurikulum
         Route::get('/kurikulum/data', [KurikulumController::class, 'data'])->name('admin.kurikulum.data');
         Route::resource('/kurikulum', KurikulumController::class)->except('edit','create');
@@ -71,5 +72,7 @@ Route::group([
         Route::resource('/sarana-prasarana/kelas', KelasController::class)->except('create','edit');
 
         // Rombel
+        Route::get('/rombel/data', [RombelController::class, 'data'])->name('admin.rombel.data');
+        Route::resource('/rombel', RombelController::class);
     });
 });

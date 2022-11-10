@@ -72,7 +72,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'kurikulum_access']); // index // submenu
 
         // create permissions Ruangan
-        Permission::create(['name' => 'ruangan_management_access']); // menu utama
+        Permission::create(['name' => 'sarana_prasarana_management_access']); // menu utama
         Permission::create(['name' => 'ruangan_store']);
         Permission::create(['name' => 'ruangan_create']);
         Permission::create(['name' => 'ruangan_edit']);

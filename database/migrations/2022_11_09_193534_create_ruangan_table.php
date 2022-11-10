@@ -21,7 +21,6 @@ return new class extends Migration
             $table->date('tahun_dibangun');
             $table->string('panjang_ruangan');
             $table->string('lebar_ruangan');
-            $table->integer('kapasitas_ruangan')->default(0);
             $table->string('foto_ruangan')->nullable()->default('default.jpg');
             $table->timestamps();
         });

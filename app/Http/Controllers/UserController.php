@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -115,18 +117,27 @@ class UserController extends Controller
         ];
 
         $roleKepalaSekolah = User::role('kepala sekolah')->first();
+        $roleAdmin  = User::role('admin')->first();
 
-        
+        // dd($roleKepalaSekolah);
+
         DB::beginTransaction();
         try {
-             // Step 1 : Create User
-             $user = User::create($data);
 
-            // Step 2 : create Role
-            if ($request->role == 'kepala sekolah' && $roleKepalaSekolah > 0 || $roleKepalaSekolah != null) {
-                return response()->json(['message' => 'Akun kepala sekolah sudah ada sebelumnya'],422);    
+            $user = User::create($data);
+
+            if ($request->role == 4) {
+                if ($roleKepalaSekolah != null) {
+                    return response()->json(['message' => 'Akun kepala sekolah sudah ada sebelumnya'],422);
+                }
+            } else if ($request->role == 1) {
+                if ($roleAdmin != null) {
+                    return response()->json(['message' => 'Akun admin sudah ada sebelumnya'],422);
+                }
             }
+
             $user->assignRole($request->role);
+
 
             DB::commit();
 
@@ -197,7 +208,8 @@ class UserController extends Controller
             'email' => $request->email,
         ];
 
-        $roleKepalaSekolah = User::role('kepala sekolah')->first();
+        $roleKepalaSekolah = User::role('kepala sekolah')->get()->count();
+        $roleAdmin = User::role('admin')->get()->count();
 
         if ($request->password != '') {
             $data['password'] = Hash::make($request->password);
@@ -209,11 +221,23 @@ class UserController extends Controller
              $user->update($data);
 
             // Step 2 : create Role
+            if ($request->role == 4) {
+                if ($roleKepalaSekolah > 0) {
+                    return response()->json(['message' => 'Akun kepala sekolah sudah ada sebelumnya'],422);
+                }
+            }
+
+            if ($request->role == 1) {
+                if ($roleAdmin > 0) {
+                    return response()->json(['message' => 'Akun admin sudah ada sebelumnya'],422);
+                }
+            }
+
             $user->syncRoles($request->role);
 
             DB::commit();
 
-            return response()->json(['message' => 'User berhasil disimpan.']);
+            return response()->json(['message' => 'User berhasil diperbaharui.']);
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollback();

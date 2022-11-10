@@ -71,7 +71,7 @@
             <img src="" class="img-thumbnail preview-foto_ruangan" style="display: none;">
         </div>
     </div>
-    
+
     <x-slot name="footer">
         <button type="button" onclick="submitForm(this.form)" class="btn btn-sm btn-primary"><i class="fas fa-save"></i> Simpan</button>
     </x-slot>
