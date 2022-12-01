@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('gelar_depan')->nullable();
             $table->string('gelar_belakang')->nullable();
             $table->string('nip')->nullable();
-            $table->string('nik_guru')->unique();
-            $table->string('nuptk_guru')->unique();
+            $table->string('nik_guru')->unique()->nullable();
+            $table->string('nuptk_guru')->unique()->nullable();
+            $table->enum('status', ['Guru','Kepala Madrasah'])->nullable();
             $table->timestamps();
         });
     }

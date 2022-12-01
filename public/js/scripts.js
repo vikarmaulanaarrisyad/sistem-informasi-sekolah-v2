@@ -44,6 +44,8 @@ function loopForm(originalForm) {
                 $(`[name=${field}]`).summernote('code', originalForm[field]);
             } else if ($(`[name=${field}]`).attr('type') == 'checkbox') {
                 $(`[name=${field}]`).filter(`[value="${originalForm[field]}"]`).prop('checked', true);
+            } else if ($(`[name=${field}]`).attr('type') == 'radio') {
+                $(`[name=${field}]`).filter(`[value="${originalForm[field]}"]`).prop('checked', true);
             } else {
                 $(`[name=${field}]`).val(originalForm[field]);
             }

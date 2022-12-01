@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             KurikulumTableSeeder::class,
             JenisRuangTableSeeder::class,
             RuanganTableSeeder::class,
-            KelasTableSeeder::class,
+            TingkatRombelTableSeeder::class,
         ]);
     }
 }

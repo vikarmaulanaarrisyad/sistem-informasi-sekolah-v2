@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Kelas')
+@section('title', 'Rombongan Belajar')
 
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Kelas</li>
+    <li class="breadcrumb-item active">Rombongan Belajar</li>
 @endsection
 
 @section('content')
@@ -15,18 +15,18 @@
                     <div class="d-flex flex-column">
                         <div class="row">
                             <div class="col-9">
-                                @can('kelas_store')
-                                <button onclick="addForm(`{{ route('kelas.store') }}`)" class="btn btn-sm btn-primary"><i
-                                    class="fas fa-plus-circle"></i> Tambah Kelas</button>
+                                @can('rombel_store')
+                                <button onclick="addForm(`{{ route('rombel.store') }}`)" class="btn btn-sm btn-primary"><i
+                                    class="fas fa-plus-circle"></i> Tambah Rombel</button>
                                 @endcan
                             </div>
                             <div class="col-3 ">
                                 <div class="form-group">
                                     <select name="tahunpelajaran2" id="tahunpelajaran2" class="custom-select text-sm float-right">
                                         <option disabled selected>Pilih Tahun Pelajaran</option>
-                                        @foreach ($getAllTahunAjaran as $tahunPelajaran )
+                                        {{--  @foreach ($getAllTahunAjaran as $tahunPelajaran )
                                             <option value="{{ $tahunPelajaran->id }}" {{ $tahunPelajaran->is_active == 1 ? 'selected' : '' }}>{{ $tahunPelajaran->nama }} {{ $tahunPelajaran->is_semester }}</option>
-                                        @endforeach
+                                        @endforeach  --}}
                                     </select>
                                 </div>
                             </div>
@@ -38,9 +38,11 @@
                 <x-table>
                     <x-slot name="thead">
                         <th width="5%">No</th>
-                        <th>Nama Kelas</th>
-                        <th>Wali Kelas</th>
-                        <th>Kapasitas Kelas</th>
+                        <th width="5%">Nama Rombel</th>
+                        <th width="5%">Tingkat</th>
+                        <th width="5%">Wali Kelas</th>
+                        <th width="5%">Nama Ruangan</th>
+                        <th width="5%">Jumlah Siswa</th>
                         <th width="15%" style="text-align: center">Aksi</th>
                     </x-slot>
                 </x-table>
@@ -48,7 +50,7 @@
         </div>
     </div>
 
-@include('admin.kelas.form')
+@include('admin.rombel.form')
 @endsection
 
 @include('layouts.include.datatables')
@@ -62,22 +64,21 @@
             processing: true,
             autoWidth: false,
             ajax: {
-                url: '{{ route('admin.kelas.data') }}',
-                data: function (d) {
-                    d.tahunpelajaran = $('[name=tahunpelajaran2]').val()
-                },
+                url: '{{ route('admin.rombel.data') }}',
             
             },
             columns: [
                 {data: 'DT_RowIndex' , searchable: false},
-                {data: 'nama_kelas'},
+                {data: 'nama_rombel'},
+                {data: 'tingkat_rombel'},
                 {data: 'wali_kelas'},
-                {data: 'kapasitas'},
+                {data: 'nama_ruangan'},
+                {data: 'jumlah_siswa'},
                 {data: 'aksi', seacrhable: false, sortable: false},
                 ]
         });
         
-        function addForm(url, title = 'Tambah Kelas') {
+        function addForm(url, title = 'Tambah Rombongan Belajar') {
             $(modal).modal('show'); 
             $(`${modal} .modal-title`).text(title); 
             $(`${modal} form`).attr('action', url); 
@@ -85,7 +86,7 @@
             resetForm(`${modal} form`);
         }
 
-        function editForm(url, title = 'Edit Kelas') {
+        function editForm(url, title = 'Edit Rombongan Belajar') {
             $.get(url)
                 .done(response => {
                     $(`${modal}`).modal('show');
@@ -152,13 +153,13 @@
                 buttonsStyling: true,
             })
             swalWithBootstrapButtons.fire({
-                title: 'Perhatian',
-                text: "Apakah Anda yakin akan menghapus data ini?, data yang dihapus tidak dapat dikembalikan lagi",
+                title: 'Apakah anda yakin ingin menghapus data ini?',
+                text: "Data yang dihapus tidak dapat dikembalikan lagi",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: 'rgb(48, 133, 214)',
                 cancelButtonColor: '#aaa',
-                confirmButtonText: 'Ya, Hapus!',
+                confirmButtonText: 'Ya, Hapus Rombel!',
                 cancelButtonText: 'Cancel',
                 reverseButtons: true
             }).then((result) => {
@@ -247,6 +248,5 @@
                 }
             });
         }
-
     </script>
 @endpush

@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('siswa', function (Blueprint $table) {
+        Schema::create('rombel_siswa', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('tahun_ajaran_id')->nullable();
-            $table->string('nama_siswa');
-            $table->string('nisn')->unique()->nullable();
-            $table->string('tmp_lahir_siswa')->nullable();
-            $table->string('nik_siswa')->unique()->nullable();
+            $table->unsignedBigInteger('rombel_id')->nullable();
+            $table->unsignedBigInteger('siswa_id')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('siswa');
+        Schema::dropIfExists('rombel_siswa');
     }
 };

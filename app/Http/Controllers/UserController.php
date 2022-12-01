@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\Tahunajaran;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -25,7 +27,9 @@ class UserController extends Controller
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $roles = Role::all();
-        return view ('admin.user.index', compact('roles'));
+        $tahunAjaranAktif = Tahunajaran::where('is_active', 1)->pluck('id')->first();
+
+        return view ('admin.user.index', compact('roles','tahunAjaranAktif'));
     }
 
     /**
@@ -119,8 +123,6 @@ class UserController extends Controller
         $roleKepalaSekolah = User::role('kepala sekolah')->first();
         $roleAdmin  = User::role('admin')->first();
 
-        // dd($roleKepalaSekolah);
-
         DB::beginTransaction();
         try {
 
@@ -134,10 +136,13 @@ class UserController extends Controller
                 if ($roleAdmin != null) {
                     return response()->json(['message' => 'Akun admin sudah ada sebelumnya'],422);
                 }
+            } else if ($request->role == 2 ) {
+                 Siswa::create(['user_id' => $user->id, 'tahun_ajaran_id' => $request->tahun_ajaran_id , 'nama_siswa' => $user->name, ]);
+            } else if ($request->role == 3 ) {
+                 Guru::create(['user_id' => $user->id, 'nama_guru' => $user->name, 'status' => 'Guru' ]);
             }
 
             $user->assignRole($request->role);
-
 
             DB::commit();
 
@@ -146,7 +151,8 @@ class UserController extends Controller
             //throw $th;
             DB::rollback();
 
-            return response()->json(['message' => 'Something Went Wrong!'],422);
+            // return response()->json(['message' => 'Something Went Wrong!'],422);
+            return response()->json(['errors' => $th, 'message' => 'Something Went Wrong!'],422);
         }
     }
 
@@ -231,7 +237,7 @@ class UserController extends Controller
                 if ($roleAdmin > 0) {
                     return response()->json(['message' => 'Akun admin sudah ada sebelumnya'],422);
                 }
-            }
+            } 
 
             $user->syncRoles($request->role);
 
@@ -239,10 +245,9 @@ class UserController extends Controller
 
             return response()->json(['message' => 'User berhasil diperbaharui.']);
         } catch (\Throwable $th) {
-            //throw $th;
             DB::rollback();
 
-            return response()->json(['message' => 'Something Went Wrong!'],422);
+            return response()->json(['errors' => $th, 'message' => 'Something Went Wrong!'],422);
         }
     }
 

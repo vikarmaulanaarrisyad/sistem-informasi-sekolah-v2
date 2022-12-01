@@ -5,6 +5,7 @@
 
     @method('POST')
     <div class="row">
+        <input type="hidden" name="tahun_ajaran_id" value="{{ $tahunAjaranAktif }}">
         <div class="col-lg-6">
             <div class="form-group">
                 <label for="name">Nama Lengkap</label>

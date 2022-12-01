@@ -39,17 +39,11 @@ class RuanganController extends Controller
             ->editColumn('gambar', function ($ruangan) {
                 return '<img src="'. Storage::disk('public')->url($ruangan->foto_ruangan) .'" class="img-fluid">';
             })
-            ->editColumn('panjang_ruangan', function ($ruangan) {
-                return $ruangan->panjang_ruangan .' M';
-            })
-            ->editColumn('lebar_ruangan', function ($ruangan) {
-                return $ruangan->lebar_ruangan .' M';
-            })
             ->addColumn('aksi', function ($ruangan) {
                 return '
-                <button onclick="editForm(`' . route('ruangan.show', $ruangan->id) . '`)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
-                <button  onclick="deleteData(`' . route('ruangan.destroy', $ruangan->id) . '`)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>';
-
+                <button onclick="editForm(`' . route('ruangan.show', $ruangan->id) . '`)" class="btn  btn-sm btn-primary"><i class="fas fa-pencil-alt"></i> Edit</button>
+                <button data-id="'. $ruangan->id  .'"  onclick="deleteData(`' . route('ruangan.destroy', $ruangan->id) . '`)" class="btn  btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</button>'
+                ;
             })
             ->escapeColumns([])
             ->make(true);
@@ -115,17 +109,6 @@ class RuanganController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Ruangan  $ruangan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ruangan $ruangan)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -161,12 +144,17 @@ class RuanganController extends Controller
 
         $data = $request->except('foto_ruangan');
 
+
         if ($request->hasFile('foto_ruangan')) {
+            if ($ruangan->foto_ruangan == NULL) {
+                $data['foto_ruangan'] = upload('ruangan', $request->file('foto_ruangan'), 'ruangan');
+            }
+            
             if (Storage::disk('public')->exists($ruangan->foto_ruangan)) {
                 Storage::disk('public')->delete($ruangan->foto_ruangan);
             }
 
-            $data['foto_ruangan'] = upload('ruangan', $request->file('path_image'), 'ruangan');
+            $data['foto_ruangan'] = upload('ruangan', $request->file('foto_ruangan'), 'ruangan');
         }
 
         $ruangan->update($data);

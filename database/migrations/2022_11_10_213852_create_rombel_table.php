@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tahun_ajaran_id')->nullable();
             $table->unsignedBigInteger('kurikulum_id')->nullable();
             $table->string('nama_rombel');
-            $table->integer('tingkat_rombel')->default(0);
+            $table->unsignedBigInteger('tingkat_rombel_id');
             $table->integer('jumlah_siswa')->default(0);
             $table->timestamps();
         });

@@ -66,6 +66,7 @@ Route::group([
         // Ruangan
         Route::get('/sarana-prasarana/ruangan/data', [RuanganController::class, 'data'])->name('admin.ruangan.data');
         Route::resource('/sarana-prasarana/ruangan', RuanganController::class)->except('create','edit');
+        Route::get('/sarana-prasarana/ruangan/ruangan-detail/{id}',[RuanganController::class, 'detail'])->name('admin.ruangan.detail');
 
         // Kelas
         Route::get('/sarana-prasarana/kelas/data', [KelasController::class, 'data'])->name('admin.kelas.data');
@@ -74,5 +75,6 @@ Route::group([
         // Rombel
         Route::get('/rombel/data', [RombelController::class, 'data'])->name('admin.rombel.data');
         Route::resource('/rombel', RombelController::class);
+        Route::get('/rombel/rombel-detail/{id}', [RombelController::class, 'detail'])->name('admin.rombel.detail');
     });
 });

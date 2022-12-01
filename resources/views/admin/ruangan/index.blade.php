@@ -22,12 +22,10 @@
                 <x-table>
                     <x-slot name="thead">
                         <th width="5%">No</th>
-                        <th>Jenis Ruangan</th>
-                        <th>Nama Ruangan</th>
-                        <th>Panjang</th>
-                        <th>Lebar</th>
+                        <th width="20%">Jenis Ruangan</th>
+                        <th width="15%">Nama Ruangan</th>
                         <th width="10%">Gambar</th>
-                        <th width="15%" style="text-align: center">Aksi</th>
+                        <th width="10%">Aksi</th>
                     </x-slot>
                 </x-table>
             </x-card>
@@ -56,8 +54,6 @@
                 {data: 'DT_RowIndex' , searchable: false},
                 {data: 'jenis_ruangan'},
                 {data: 'nama_ruangan'},
-                {data: 'panjang_ruangan'},
-                {data: 'lebar_ruangan'},
                 {data: 'gambar'},
                 {data: 'aksi', seacrhable: false, sortable: false},
                 ]
@@ -138,11 +134,11 @@
                 buttonsStyling: true,
             })
             swalWithBootstrapButtons.fire({
-                title: 'Perhatian',
-                text: "Apakah Anda yakin akan menghapus data ini?, data yang dihapus tidak dapat dikembalikan lagi",
+                title: 'Apakah anda yakin hapus data ini?',
+                text: "Data yang sudah dihapus tidak bisa dikembalikan lagi.",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: 'rgb(48, 133, 214)',
+                confirmButtonColor: 'rgb(50, 133, 214)',
                 cancelButtonColor: '#aaa',
                 confirmButtonText: 'Ya, Hapus!',
                 cancelButtonText: 'Cancel',
@@ -177,63 +173,6 @@
                 }
             })
         }
-
-               // Filtering Data
-        $('[name=tahunpelajaran2]').on('change', function () {
-            table.ajax.reload();
-        })
-
-
-
-        function updateStatus (url) {
-            const swalWithBootstrapButtons = Swal.mixin({
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-danger'
-                },
-                buttonsStyling: true,
-            })
-            swalWithBootstrapButtons.fire({
-                title: 'Perhatian',
-                text: "Apakah Anda yakin ingin meluluskan siswa ini?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: 'rgb(48, 133, 214)',
-                cancelButtonColor: '#aaa',
-                confirmButtonText: 'Ya, Aktifkan!',
-                cancelButtonText: 'Cancel',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.post(url, {
-                            '_method': 'put'
-                        })
-                        .done(response => {
-                            if (response.status = 200) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Berhasil',
-                                    text: response.message,
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                })
-                                table.ajax.reload();
-                            }
-                        })
-                        .fail(errors => {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Gagal!',
-                                text: errors.responseJSON.message,
-                                showConfirmButton: false,
-                                timer: 2000
-                            })
-                            table.ajax.reload();
-                        });
-                }
-            });
-        }
-
     </script>
 @endpush
 
